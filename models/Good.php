@@ -15,10 +15,10 @@ use Yii;
 class Good extends ActiveRecord
 {
 
-    public static function tableName()
-    {
-        return 'good';
-    }
+//    public static function tableName()
+//    {
+//        return 'good';
+//    }
 
     public function getAllGoods() {
         $goods = Yii::$app->cache->get('goods');
@@ -28,5 +28,23 @@ class Good extends ActiveRecord
         }
         return $goods;
     }
+
+    public function getGoodsCategory($id) {
+        $catgoods = Yii::$app->cache->get('catgoods');
+        if (!$catgoods) {
+            $catgoods = Good::find()->where(['category' => $id])->asArray()->all();
+            Yii::$app->cache->set('catgoods', $catgoods, 5);
+        }
+
+        return $catgoods;
+    }
+    public function getGoodsSearch($search) {
+
+            $goods = Good::find()->where(['like', 'name', $search])->asArray()->all();
+
+        return $goods;
+    }
+
+
 
 }
