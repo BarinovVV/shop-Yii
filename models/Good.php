@@ -45,6 +45,11 @@ class Good extends ActiveRecord
         return $goods;
     }
 
+    public function getOneGood($name) {
+        $oneGood = Good::find()->where(['link_name' => $name])->one();
+        return $oneGood;
+    }
+
 
 
 }
