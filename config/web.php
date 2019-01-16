@@ -55,6 +55,16 @@ $config = [
                 'good/<name>' => 'good/index',
             ],
         ],
+//        'assetManager' => [
+//            'bundles' => [
+//                'yii\web\JqueryAsset' => [
+//                    'sourcePath' => null,   // не опубликовывать комплект
+//                    'js' => [
+//                        '//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js',
+//                    ]
+//                ],
+//            ],
+//        ],
 
     ],
     'params' => $params,

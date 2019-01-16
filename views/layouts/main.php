@@ -33,7 +33,7 @@ AppAsset::register($this);
         <div class="header">
           <a href="/">На главную</a>
           <a href="#">Вход в админку</a>
-          <a class="cart" href="#">Корзина</a>
+          <a href="#" onclick="openCart(event)">Корзина</a>
           <form action="<?=Url::to(['category/search'])?>" method="get">
             <input type="text" style="padding: 5px" placeholder="Поиск..." name="search">
           </form>
