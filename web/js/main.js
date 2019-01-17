@@ -1,6 +1,3 @@
-// $('.cart').on('click', function () {
-//   $('#cart').modal('show');
-// });
 
 function openCart(event) {
   event.preventDefault();
@@ -83,4 +80,20 @@ $('.modal-content').on('click', '.delete', function () {
       alert('Ошибка!');
     }
   })
+})
+
+$('.modal-content').on('click','.btn-next', function () {
+  $.ajax({
+    url: '/cart/order',
+    type: 'GET',
+    success: function (res) {
+      $('#order .modal-content').html(res);
+      $('#cart').modal('hide');
+      $('#order').modal('show');
+    },
+    error: function () {
+      alert('Ошибка!');
+    }
+  })
+
 })

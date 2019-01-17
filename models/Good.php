@@ -15,10 +15,10 @@ use Yii;
 class Good extends ActiveRecord
 {
 
-//    public static function tableName()
-//    {
-//        return 'good';
-//    }
+    public static function tableName()
+    {
+        return 'good';
+    }
 
     public function getAllGoods() {
         $goods = Yii::$app->cache->get('goods');

@@ -13,6 +13,11 @@ use yii\db\ActiveRecord;
 
 class Cart extends ActiveRecord
 {
+    public static function tableName()
+    {
+        return 'cart';
+    }
+
     public function addToCart($good) {
 
         if (isset($_SESSION['cart'][$good->id])) {
