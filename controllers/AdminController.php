@@ -11,9 +11,7 @@ use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use app\models\LoginForm;
 
-/**
- * AdminController implements the CRUD actions for Order model.
- */
+
 class AdminController extends Controller
 {
     /**
