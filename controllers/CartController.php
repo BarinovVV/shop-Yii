@@ -12,6 +12,7 @@ namespace app\controllers;
 use app\models\Good;
 use app\models\Cart;
 use app\models\Order;
+use yii\helpers\Url;
 use yii\web\Controller;
 use Yii;
 
@@ -66,20 +67,24 @@ class CartController extends Controller
 
         $session = Yii::$app->session;
         $session->open();
+        if (!$session['cart.totalSum']) {
+            return Yii::$app->response->redirect(Url::to('/'));
+        }
         $order = new Order();
         if ($order->load(Yii::$app->request->post())) {
             $order->date = date('Y-m-d H:i:s');
             $order->sum = $session['cart.totalSum'];
             if ($order->save()) {
-                Yii::$app->mailer->compose()
-                    ->setFrom(['mymail@mail.ru' => 'test test'])
-                    ->setTo('yourmail@mail.ru')
+                $currentId = $order->id;
+                Yii::$app->mailer->compose('order-mail', compact('session', 'order'))
+                    ->setFrom(['skyvalery70@gmail.com' => 'test test'])
+                    ->setTo($order->email)
                     ->setSubject('Ваш заказ принят' )
                     ->send();
                 $session->remove('cart');
                 $session->remove('cart.totalQuantity');
                 $session->remove('cart.totalSum');
-                return $this->render('success', compact('session'));
+                return $this->render('success', compact('session', 'currentId'));
 
             }
         }
