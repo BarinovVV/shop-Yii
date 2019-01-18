@@ -3,7 +3,7 @@
 <h3 style="color: #c7254e">Заказ под номером <?=$order->id?> принят </h3>
 <p style="text-decoration: underline">Ваш телефон: <?=$order->phone?></p>
 <div class="table-responsive">
-  <table class="table table-hover table-striped">
+  <table class="table table-hover table-striped" style="background: #86cfda; border: 5px double #000">
       <thead>
       <tr>
           <th>Наименование</th>
@@ -15,10 +15,10 @@
       <tbody>
       <?foreach ($session['cart'] as $id => $item) {?>
       <tr>
-          <th><?=$item['name']?></th>
-          <td><?=$item['goodQuantity']?></td>
-          <td><?=$item['price']?></td>
-          <td><?=$item['price']*$item['goodQuantity']?></td>
+          <th style="border: 1px solid #fff; padding: 5px"><?=$item['name']?></th>
+          <td style="border: 1px solid #fff; padding: 5px"><?=$item['goodQuantity']?></td>
+          <td style="border: 1px solid #fff; padding: 5px"><?=$item['price']?></td>
+          <td style="border: 1px solid #fff; padding: 5px"><?=$item['price']*$item['goodQuantity']?></td>
       </tr>
       <? } ?>
       <tr>

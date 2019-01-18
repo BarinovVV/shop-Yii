@@ -12,6 +12,7 @@ namespace app\controllers;
 use app\models\Good;
 use app\models\Cart;
 use app\models\Order;
+use app\models\OrderGood;
 use yii\helpers\Url;
 use yii\web\Controller;
 use Yii;
@@ -76,6 +77,7 @@ class CartController extends Controller
             $order->sum = $session['cart.totalSum'];
             if ($order->save()) {
                 $currentId = $order->id;
+                $this->saveOrderInfo($session['cart'], $currentId);
                 Yii::$app->mailer->compose('order-mail', compact('session', 'order'))
                     ->setFrom(['skyvalery70@gmail.com' => 'test test'])
                     ->setTo($order->email)
@@ -91,5 +93,19 @@ class CartController extends Controller
         $this->layout = 'empty-layout';
         return $this->render('order', compact('session', 'order'));
 
+    }
+
+    protected function saveOrderInfo($goods, $orderId) {
+        foreach ($goods as $id=>$good) {
+
+            $orderInfo = new OrderGood();
+            $orderInfo->order_id = $orderId;
+            $orderInfo->product_id = $id;
+            $orderInfo->name = $good['name'];
+            $orderInfo->price = $good['price'];
+            $orderInfo->quantity = $good['goodQuantity'];
+            $orderInfo->sum = $good['price'] * $good['goodQuantity'];
+            $orderInfo->save();
+        }
     }
 }
